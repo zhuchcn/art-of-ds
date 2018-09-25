@@ -118,6 +118,23 @@ integrity of their content
 
 ## Case Study: FFS HDL Lipidome {.build}
 
+A reminder of the fast food study design
+
+![](img/crossover.png)
+
+## Lipidomics
+
+* The lipidomics is a subset of metabolimcs that aims at identifying and quantifying all lipid species from a biological or enviromental sample.
+
+* The west coast metabolomics center's untargeted lipidomics platform is now able to detect and quantify over 300 lipid speceis in 14 lipid classes.
+
+* Because HDL is a lipid-protein complex, what lipid speceis present in HDL and their quantity affect the HDL function.
+
+* The lipidomics technique is used a lot by us to study the lipid composition of HDL.
+
+
+## Case Study: FFS HDL Lipidome (2) {.build}
+
 * Check the dimensions (number of rows and number of columns) of the data:
 
 ```{r, echo = FALSE}
@@ -140,7 +157,7 @@ pdata = lpd$sample_table
 dim(edata)
 ```
 
-## Case Study: FFS HDL Lipidome (2) {.build}
+## Case Study: FFS HDL Lipidome (3) {.build}
 
 * Question 1: Why does it have 45 samples not 40?
 * Check the top and tial of the sample data
@@ -152,7 +169,7 @@ head(pdata) %>%
     row_spec(0, font_size = 15)
 ```
 
-## Case Study: FFS HDL Lipidome (3) {.build}
+## Case Study: FFS HDL Lipidome (4) {.build}
 
 * Remove QCs and check dimensions again
 
@@ -164,7 +181,7 @@ pdata = lpd$sample_table
 dim(edata)
 ```
 
-## Case Study: FFS HDL Lipidome (4) {.build}
+## Case Study: FFS HDL Lipidome (5) {.build}
 
 * Question 2: Are the 604 features all successfully annotated?
 * Look at the top of the feature data
@@ -176,7 +193,7 @@ head(fdata) %>%
     row_spec(0, font_size = 15)
 ```
 
-## Case Study: FFS HDL Lipidome (5) {.build}
+## Case Study: FFS HDL Lipidome (6) {.build}
 
 * Look at the tail of the feature data
 
@@ -187,7 +204,7 @@ tail(fdata) %>%
     row_spec(0, font_size = 15)
 ```
 
-## Case Study: FFS HDL Lipidome (6) {.build}
+## Case Study: FFS HDL Lipidome (7) {.build}
 
 * We can then make a count plot of rows (features) with annotation vs without annotation
 * Looks like there are many features without an annotation. We can just remove them
@@ -207,7 +224,7 @@ fdata = lpd$feature_data
 pdata = lpd$sample_table
 ```
 
-## Case Study: FFS HDL Lipidome (7) {.build}
+## Case Study: FFS HDL Lipidome (8) {.build}
 
 * Now we removed all the rows without the annotation. 
 * Question 3: are there any missing values?
@@ -226,7 +243,7 @@ plot_hist_NA(lpd)
 1. remove features with to many zeros
 2. fill the NAs with a reasonable small value
 
-## Case Study: FFS HDL Lipidome (8) {.build}
+## Case Study: FFS HDL Lipidome (9) {.build}
 
 * Does each individual row have unique feature annotation?
 
@@ -240,7 +257,7 @@ plot_hist_NA(lpd)
     ggplotly
 ```
 
-## Case Study: FFS HDL Lipidome (9) {.build}
+## Case Study: FFS HDL Lipidome (10) {.build}
 
 ```{r}
 fdata %>%
@@ -278,7 +295,7 @@ lpd$feature_data$Annotation = make.unique(lpd$feature_data$Annotation)
 featureNames(lpd) = lpd$feature_data$Annotation
 ```
 
-## Case Study: FFS HDL Lipidome (10) {.build}
+## Case Study: FFS HDL Lipidome (11) {.build}
 
 * Now we can run hypothesis test using linear model. We can make a histogram of the P values of the 170 features
 
@@ -298,7 +315,7 @@ ggplot(limma_conc) +
     theme_bw()
 ```
 
-## Case Study: FFS HDL Lipidome (10) {.build}
+## Case Study: FFS HDL Lipidome (12) {.build}
 
 * If you have 10000 random variables and we run statistic analysis, what would the distribution of p values look like?
 
@@ -313,7 +330,7 @@ ggplot(top) +
     theme_bw()
 ```
 
-## Case Study: FFS HDL Lipidome (11) {.build}
+## Case Study: FFS HDL Lipidome (13) {.build}
 
 * We can plot some features that have a significant p value. And there is a person seems always different from other subjects.
 
@@ -346,7 +363,7 @@ plot_grid(
 )
 ```
 
-## Case Study: FFS HDL Lipidome (12) {.build}
+## Case Study: FFS HDL Lipidome (14) {.build}
 
 * After we fix the mislabelled 116
 
@@ -362,7 +379,7 @@ ggplot(limma) +
     theme_bw()
 ```
 
-## Case Study: FFS HDL Lipidome (13) {.build}
+## Case Study: FFS HDL Lipidome (15) {.build}
 
 ```{r}
 odd = summarize_odd_chain(lpd, "Annotation", "class")
